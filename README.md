@@ -1,6 +1,6 @@
 # nuxt
 
-> fkkmemi&#39;s nuxt web
+> Eubin&#39;s nuxt web
 
 ## Build Setup
 
