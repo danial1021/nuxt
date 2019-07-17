@@ -13,6 +13,12 @@
       <v-btn @click="hello">
         hello
       </v-btn>
+      <v-btn @click="moment">
+        moment
+      </v-btn>
+      <v-btn @click="dialogOpen">
+        dialog
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -25,14 +31,26 @@ export default {
   },
   methods: {
     async test() {
-      // this.text = 'asfd'
+      this.text = 'fwefwij'
       const r = await this.$axios.get('/api')
       this.text = r.data
     },
     async hello() {
-      // this.text = 'fdsa'
+      this.text = 'gwegwg'
       const r = await this.$axios.get('/api/hello')
       this.text = r.data
+    },
+    moment() {
+      this.text = this.$moment()
+        .toDate()
+        .toLocaleTimeString()
+    },
+    async dialogOpen() {
+      const r = await this.$dialog.confirm({
+        title: 'hello?',
+        text: 'okok??'
+      })
+      this.text = r ? 'YEEEES' : 'NOOOOOO'
     }
   }
 }
