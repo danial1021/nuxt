@@ -1,4 +1,4 @@
-# bin nuxt lecture
+# bin nuxt 
 
 ## Install tools
 
