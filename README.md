@@ -1,22 +1,53 @@
-# nuxt
+# memi nuxt lecture
 
-> Eubin&#39;s nuxt web
+## Install tools
+
+- node v8
+- yarn
+- firebase-tools
+
+## .env File setting
+
+eg)
+```text
+FIREBASE_APIKEY=yourKey
+FIREBASE_AUTHDOMAIN=yourDomain
+FIREBASE_PROJECTID=yourProjectId
+``` 
+
+guide: [https://firebase.google.com/docs/firestore/quickstart](https://firebase.google.com/docs/firestore/quickstart)
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-$ yarn install
+$ yarn
 
 # serve with hot reload at localhost:3000
-$ yarn run dev
+$ yarn dev
 
 # build for production and launch server
-$ yarn run build
+$ yarn build
 $ yarn start
 
 # generate static project
-$ yarn run generate
+$ yarn generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Firebase Setup
+
+```bash
+# login
+$ firebase login
+
+# init
+$ firebase init
+```
+
+Select all and enter default
+
+## deploy
+
+```bash
+$ yarn firebase:deploy
+```
