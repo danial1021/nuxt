@@ -1,4 +1,4 @@
-# memi nuxt lecture
+# bin nuxt lecture
 
 ## Install tools
 
