@@ -30,10 +30,17 @@ export default {
       }
     }
   },
-  mounted() {},
+  async mounted() {
+    await this.$recaptcha.init()
+  },
   methods: {
     async signIn() {
       try {
+        if (process.env.NODE_ENV === 'production') {
+          const cr = await this.checkRecaptcha()
+          if (!cr.success) throw Error('로봇 검증 실패')
+        }
+
         const r = await this.$auth().signInWithEmailAndPassword(
           this.form.email,
           this.form.password
@@ -43,6 +50,13 @@ export default {
       } catch (e) {
         console.error(e.message)
       }
+    },
+    async checkRecaptcha() {
+      const token = await this.$recaptcha.execute('login')
+      console.log('ReCaptcha token:', token)
+      if (!token) return false
+      const r = await this.$axios.post('/auth/recaptcha', { token })
+      return r.data
     }
   }
 }

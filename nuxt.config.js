@@ -15,6 +15,13 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
+    script: [
+      {
+        src: `https://www.google.com/recaptcha/api.js?render=${
+          process.env.RECAPTCHA_KEY
+        }`
+      }
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
@@ -52,7 +59,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // '@nuxtjs/dotenv',
-    'vuetify-dialog/nuxt'
+    'vuetify-dialog/nuxt',
+    '@nuxtjs/recaptcha'
     // ['vuetify-dialog/nuxt', { property: '$dialog' }] // 'vuetify-dialog/nuxt'
   ],
   // vuetifyDialog: {
@@ -63,9 +71,22 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? `https://${process.env.FIREBASE_REGION}-${
+            process.env.FIREBASE_PROJECTID
+          }.cloudfunctions.net`
+        : `http://localhost:5000/${process.env.FIREBASE_PROJECTID}/${
+            process.env.FIREBASE_REGION
+          }`
   },
   router: {
     middleware: 'auth'
+  },
+  recaptcha: {
+    hideBadge: true,
+    siteKey: process.env.RECAPTCHA_KEY,
+    version: 3
   },
 
   /*
@@ -102,6 +123,6 @@ module.exports = {
     FIREBASE_APIKEY: process.env.FIREBASE_APIKEY,
     FIREBASE_AUTHDOMAIN: process.env.FIREBASE_AUTHDOMAIN,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
-    abcd: 1234
+    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY
   }
 }
